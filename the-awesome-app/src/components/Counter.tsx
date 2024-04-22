@@ -15,9 +15,15 @@ type CounterProps = {
 //         <div></div>
 //     );
 // }
+type MyFC = (props: number) => JSX.Element;
+
+const MyFCImpl: MyFC = (props) => {
+    return (<div></div>);
+}
 
 const Counter: React.FC<CounterProps> = ({initValue, title}) => {
 
+    //const {initValue, title} = props;
     const [count, setCount] = React.useState<number>(initValue);
     function handleIncrement(){
         setCount(count + 1);

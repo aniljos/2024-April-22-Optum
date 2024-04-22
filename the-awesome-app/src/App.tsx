@@ -1,35 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import Message from './components/Message';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { Route, BrowserRouter as Router, Routes, Link } from 'react-router-dom'; 
 import Counter from './components/Counter';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <main>
-        <Message text="Hello Typescript" color="blue" 
-                          onClose={() => console.log('closing')}/>
-         <Message text="Hello Anil"/>
-         <Counter initValue={5} title='Counter 1'/>
-         <Counter initValue={10} title='Counter 2'/>
-
-      </main>
-    </div>
+    <Router>
+      <div className="container-fluid">
+        <nav className="navbar navbar-dark bg-dark">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">Navbar</a>
+            <ul className="nav">
+              <li className="nav-item">
+                <Link className="nav-link" to="/">Home</Link> 
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/counter">Counter</Link> 
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/products">Products</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">Login</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <main>
+          <Routes>
+            <Route path="/" element={<Message text='Hello World' color='blue' />} />
+            <Route path="/counter" 
+                      element={<Counter initValue={10} title='Counter'/>} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
