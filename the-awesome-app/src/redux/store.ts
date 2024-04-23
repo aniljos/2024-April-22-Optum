@@ -1,11 +1,16 @@
 import { combineReducers} from 'redux';
 import { authReducer } from './authReducer';
 import {configureStore} from '@reduxjs/toolkit'
+import gadgetReducer from './gadgetReducer';
+import productsReducer from './productsReducer';
 
 
 //create reducer=> multiple reducers => root reducer
 const rootReducer = combineReducers({
     auth: authReducer,
+    gadgets: gadgetReducer,
+    products: productsReducer
+
 });
 
 //create store

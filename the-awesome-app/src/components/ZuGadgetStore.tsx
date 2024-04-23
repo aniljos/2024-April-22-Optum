@@ -7,13 +7,14 @@ import React, {MouseEvent} from 'react';
 import { Product } from "../model/Product";
 import {addItem} from '../redux/gadgetReducer'
 import { CartItem } from "../model/CartItem";
+import { useZustandStore } from "../zustand/store";
 
 
-const GadgetStore: React.FC = () => {
+const ZuGadgetStore: React.FC = () => {
 
 
     const [products, setProducts] = useState<Product[]>([]);
-    const dispatch = useDispatch<AppDispatch>();
+    const {addItem} = useZustandStore();
     useEffect(() => {
         getProducts();
 
@@ -32,7 +33,9 @@ const GadgetStore: React.FC = () => {
 
     function addToCart(product: Product): void {
        
-        dispatch(addItem(new CartItem(product, 1)));
+        addItem(new CartItem(product, 1));
+
+        
     }
     function renderProducts() {
 
@@ -63,7 +66,7 @@ const GadgetStore: React.FC = () => {
 
     return (
         <div>
-            <h1>Gadget Store</h1>
+            <h1>Zu Gadget Store</h1>
 
             <div>
                 {renderProducts()}
@@ -73,4 +76,4 @@ const GadgetStore: React.FC = () => {
     );
 }
 
-export default GadgetStore;
+export default ZuGadgetStore;

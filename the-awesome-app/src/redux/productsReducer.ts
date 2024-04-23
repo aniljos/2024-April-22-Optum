@@ -4,11 +4,14 @@ import axios from 'axios';
 import { Product } from '../model/Product';
 
 
-export const fetchProducts = createAsyncThunk<Product[], void, GetThunkAPI<AsyncThunkConfig>>('products/fetchProducts', async (_, thunkAPI: GetThunkAPI<AsyncThunkConfig>) => {
+export const fetchProducts = 
+        createAsyncThunk<Product[], void, GetThunkAPI<AsyncThunkConfig>>
+                                ('products/fetchProducts', 
+                                async (_, thunkAPI: GetThunkAPI<AsyncThunkConfig>) => {
    
     try {
         
-        const response = await axios.get('http://localhost:9000/products');
+        const response = await axios.get('http://localhost:9000/products' );
         return response.data;
 
     } catch (error) {
@@ -33,20 +36,20 @@ const productsSlice = createSlice({
     name: 'products',
     initialState: initialState,
     reducers: {},
-    // extraReducers: builder => {
-    //     builder.addCase(fetchProducts.pending, (state) => {
-    //         state.loading = 'loading';
-    //     });
-    //     builder.addCase(fetchProducts.fulfilled, (state, action) => {
-    //         state.loading = 'idle';
-    //         state.products = action.payload;
-    //     });
-    //     builder.addCase(fetchProducts.rejected, (state, action) => {
-    //         debugger;
-    //         state.loading = 'idle';
-    //         state.error = (action.payload as any).error;
-    //     }); 
-    // }
+    extraReducers: builder => {
+        builder.addCase(fetchProducts.pending, (state) => {
+            state.loading = 'loading';
+        });
+        builder.addCase(fetchProducts.fulfilled, (state, action) => {
+            state.loading = 'completed';
+            state.products = action.payload;
+        });
+        builder.addCase(fetchProducts.rejected, (state, action) => {
+            debugger;
+            state.loading = 'failed to load';
+            state.error = (action.payload as any).error;
+        }); 
+    }
 })
 
 export default productsSlice.reducer;

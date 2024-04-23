@@ -10,8 +10,6 @@ const initialState: GadgetState = {
     cart: []
 
 }
-
-
 const gadgetSlice = createSlice({
 
     name: 'gadget',
@@ -43,5 +41,6 @@ const gadgetSlice = createSlice({
 
 })
 
+// action creators ==> addItem, removeItem
 export const { addItem, removeItem } = gadgetSlice.actions;
 export default gadgetSlice.reducer;

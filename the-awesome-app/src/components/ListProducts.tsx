@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
 import { AppDispatch, RootState } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
+import {fetchProducts} from '../redux/productsReducer';
 
 const ListProducts = () => {
 
 
-    const products: any[] =[]; 
+    const products = useSelector((state: RootState) => state.products.products);
     const dispatch = useDispatch<AppDispatch>();
     useEffect(() => {
-        
+
+        dispatch(fetchProducts());
+    
     }, []);
 
    return (

@@ -15,7 +15,15 @@ const initialState: AuthState = {
     refreshToken: ''
 }
 
-// export const authReducer = (currentState=initialState, action: any) => {
+// type MyAction = {
+
+//     type: string;
+//     payload: AuthState;
+
+
+// }
+
+// export const authReducer = (currentState=initialState, action: MyAction) => {
 
 //     if(action.type === 'SET_AUTH') {
 //         return action.payload;

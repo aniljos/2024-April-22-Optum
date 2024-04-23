@@ -2,18 +2,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../redux/store";
 import {removeItem} from '../redux/gadgetReducer';
 import { CartItem } from "../model/CartItem";
+import { useZustandStore } from "../zustand/store";
 
-const ViewCart: React.FC = () => {
+const ZuViewCart: React.FC = () => {
 
-    const cart = useSelector((state: RootState) => state.gadgets.cart)
-    const dispatch = useDispatch<AppDispatch>();
+    // const cart = useSelector((state: RootState) => state.gadgets.cart)
+    // const dispatch = useDispatch<AppDispatch>();
+
+    const {cart, removeItem,} = useZustandStore();
 
     function remove(item: CartItem) {
-        dispatch(removeItem(item));
+        //dispatch(removeItem(item));
+        removeItem(item);
     }
     return (
         <div>
-            <h1>View Cart</h1>
+            <h1>Zu View Cart</h1>
             <div className="row row-cols-1 row-cols-md-2 g-4">
                 {cart.map((item, index) => {
                    
@@ -41,4 +45,4 @@ const ViewCart: React.FC = () => {
 
 }
 
-export default ViewCart;
+export default ZuViewCart;
