@@ -1,10 +1,22 @@
+import axios from "axios";
 import React, { useRef, useState, ChangeEvent } from "react";
+import {useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import { AppDispatch } from "../redux/store";
+import {setAuth} from '../redux/authReducer';
+
+interface LoginResponse{
+    accessToken: string;
+    refreshToken: string;
+}
 
 const Login: React.FC = () => {
 
     const [name, setName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
+    const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     const nameFieldRef = useRef<HTMLInputElement>(null);
 
@@ -14,7 +26,7 @@ const Login: React.FC = () => {
     function handlePwdChange(e: ChangeEvent<HTMLInputElement>) {
         setPassword(e.target.value);
     }
-    function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.FormEvent) {
 
        e.preventDefault();
 
@@ -24,6 +36,25 @@ const Login: React.FC = () => {
         }
 
         //API call to authenticate user
+        try {
+            
+            const response = await axios.post<LoginResponse>("http://localhost:9000/login", {name, password});
+            const {accessToken, refreshToken} = response.data;
+            // dispatch({type:"SET_AUTH", 
+            //                 payload: {userName: name, isAuthenticated: true, accessToken, refreshToken}});
+
+            dispatch(setAuth({userName: name, isAuthenticated: true, accessToken, refreshToken}));
+            setError(null);
+            navigate("/");
+
+        } catch (error) {
+            // dispatch({type:"SET_AUTH", 
+            //                 payload: {userName: "", isAuthenticated:false, accessToken: "", refreshToken: ""}});
+
+            dispatch(setAuth({userName: "", isAuthenticated:false, accessToken: "", refreshToken: ""}));
+            setError("Invalid credentials");
+
+        }
 
     }
 
