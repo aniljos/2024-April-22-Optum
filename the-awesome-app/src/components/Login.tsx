@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef, useState, ChangeEvent } from "react";
+import React, { useRef, useState, ChangeEvent, useEffect } from "react";
 import {useDispatch} from 'react-redux';
 import {useNavigate} from 'react-router-dom';
 import { AppDispatch } from "../redux/store";
@@ -19,6 +19,12 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
 
     const nameFieldRef = useRef<HTMLInputElement>(null);
+    const count = useRef(10); // not reset
+    let acount = 10; // reset to 10 when the component rerenders
+
+    useEffect(() => {
+        nameFieldRef.current?.focus();
+    }, [])
 
     function handleNameChange(e: ChangeEvent<HTMLInputElement>) {
         setName(e.target.value);
@@ -67,7 +73,7 @@ const Login: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="username">Username</label>
-                    <input type="text" id="username" className="form-control" onChange={handleNameChange} />
+                    <input ref={nameFieldRef} type="text" id="username" className="form-control" onChange={handleNameChange} />
                 </div>
 
                 <div className="form-group">

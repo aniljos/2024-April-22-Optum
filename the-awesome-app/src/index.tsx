@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import {store} from './redux/store';
-import { AppThemeContext, initState } from './context/AppThemeContext';
+import { AppThemeContext, AppThemeContextProvider, initState } from './context/AppThemeContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,11 +13,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
 
-    <AppThemeContext.Provider value={initState}>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </AppThemeContext.Provider>
+    {/* <AppThemeContext.Provider value={initState}> */}
+    <AppThemeContextProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+    </AppThemeContextProvider>
+    {/* </AppThemeContext.Provider> */}
     
   </React.StrictMode>
 );

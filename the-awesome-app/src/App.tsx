@@ -16,6 +16,16 @@ function App() {
 
   const theme = useContext(AppThemeContext);
 
+  function handleChangeTheme() {
+    
+    if(theme.mode === 'dark') {
+      theme.dispatch!({type: 'SET_LIGHT'});
+    } else {
+      theme.dispatch!({type: 'SET_DARK'});
+    }
+    
+  }
+
   return (
     <Router>
       <div className="container-fluid">
@@ -46,6 +56,9 @@ function App() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/zucart">ZuView Cart</Link>
+              </li>
+              <li>
+                <button className='btn btn-warning' onClick={handleChangeTheme}>Switch Theme</button>
               </li>
             </ul>
           </div>
