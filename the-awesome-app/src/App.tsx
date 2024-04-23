@@ -3,6 +3,7 @@ import Message from './components/Message';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Route, BrowserRouter as Router, Routes, Link } from 'react-router-dom'; 
 import Counter from './components/Counter';
+import Login from './components/Login';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Route path="/" element={<Message text='Hello World' color='blue' />} />
             <Route path="/counter" 
                       element={<Counter initValue={10} title='Counter'/>} />
+            <Route path="/login" element={<Login/>}/>
           </Routes>
         </main>
       </div>

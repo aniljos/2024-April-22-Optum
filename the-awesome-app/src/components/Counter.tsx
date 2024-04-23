@@ -15,11 +15,11 @@ type CounterProps = {
 //         <div></div>
 //     );
 // }
-type MyFC = (props: number) => JSX.Element;
+// type MyFC = (props: number) => JSX.Element;
 
-const MyFCImpl: MyFC = (props) => {
-    return (<div></div>);
-}
+// const MyFCImpl: MyFC = (props) => {
+//     return (<div></div>);
+// }
 
 const Counter: React.FC<CounterProps> = ({initValue, title}) => {
 
