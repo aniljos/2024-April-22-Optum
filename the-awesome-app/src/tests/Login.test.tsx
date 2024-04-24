@@ -4,6 +4,9 @@ import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 import { BrowserRouter } from 'react-router-dom';
 
+//jest.mock
+//jest.spyOn
+
 test('renders the component', () => {
 
     render(<BrowserRouter> <Provider store={store}> <Login/> </Provider> </BrowserRouter>);
